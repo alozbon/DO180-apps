@@ -1,0 +1,1000 @@
+  137  history
+  138  sudo podman exec -it httpd-basic /bin/bash
+  139  sudo podman ps -q
+  140  sudo podman ps -a
+  141  lab container-review status
+  142  lab container-review grade
+  143  lab container-review finish
+  144  sudo systemctl start httpd
+  145  history
+  146  docker
+  147  ps -ef
+  148  ps -ef|grep podm
+  149  ps -ef|more
+  150  systemctl |more
+  151  df -k
+  152  sudo podman status
+  153  sudo podman stats
+  154  systemctl |more
+  155  lab manage-lifecycle start
+  156  sudo podman run --name mysql-db rhscl/mysql-57-rhel7
+  157  sudo podman logs mysql-db
+  158  sudo podman inspect rhscl/mysql-57-rhel7
+  159  sudo podman run --name mysql -d -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 rhscl/mysql-57-rhel7
+  160  sudo podman ps
+  161  sudo podman inspect -f '{{.NetworkSetting.IPAddress }}' mysql
+  162  sudo podman inspect -f '{{ .NetworkSetting.IPAddress }}' mysql
+  163  sudo podman inspect -f '{{ .NetworkSettings.IPAddress }}' mysql
+  164  mysql -u user1 -h 10.88.0.18 -p items
+  165  sudo podman run --name mysql-2 -it rhscl/mysql-57-rhel7 /bin/bash
+  166  sudo podman exec mysql /bin/bash -c 'mysql -uuser1 -p -e "select * from items.Projects;"'
+  167  lab manage-lifecycle finish
+  168  podman images
+  169  sudo podman images
+  170  sudo podman inspect registry.access.redhat.com/ubi7
+  171  sudo podman images
+  172  sudo podman inspect registry.access.redhat.com/rhel7
+  173  sudo podman inspect registry.access.redhat.com/rhel7:7.5
+  174  sudo mkaidr /var/dbfiles
+  175  sudo chown -R 27:27 /var/db/
+  176  sudo mkdir /var/dbfiles
+  177  sudo chown -R 27:27 /var/dbfiles/
+  178  ls -la /var/
+  179  chown root:root /var/db
+  180  sudo chown root:root /var/db
+  181  sudo semanage fcontext -a -t container_file_t '/var/dbfiles(/.*)?'
+  182  sudo restorecon -Rv /var/dbfiles/
+  183  sudo podman run -v /var/dbfiles:/var/lib/mysql rhmap47/mysql
+  184  lab manage-storage start
+  185  mkdir /var/local/mysql
+  186  sudo semanage fcontext -a -t container_file_t '/var/local/mysql(/.*)?'
+  187  sudo restorecon -R /var/local/mysql
+  188  sudo mkdir /var/local/mysql
+  189  sudo restorecon -R /var/local/mysql
+  190  ls -dZ /var/local/mysql
+  191  sudo chown -Rv 27:27 /var/local/mysql
+  192  sudo podman run --name persist-db -d -v /var/local/mysql:/var/lib/mysql/data -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWROD=r00tpa55 rhscl/mysql-57-rhel7
+  193  sudo podman run --name persist-db -d -v /var/local/mysql:/var/lib/mysql/data -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 rhscl/mysql-57-rhel7
+  194  sudo podman ps --fort="table {{.ID}} {{.Names}} {{.Status}}"
+  195  sudo podman ps --format="table {{.ID}} {{.Names}} {{.Status}}"
+  196  ls -la /var/local/mysql/
+  197  lab manage-storage
+  198  history
+  199  ls -la /var/local/mysql/
+  200  ls -la /var/local/mysql/items
+  201  sudo la -la /var/local/mysql/items/
+  202  sudo ls -la /var/local/mysql/items/
+  203  lab manage-storage finish
+  204  sudo ip ad sh
+  205  asudo brctl show
+  206  sudo brctl show
+  207  cd /etc/cni
+  208  ls
+  209  cd net.d
+  210  ls
+  211  cat 87-podman-bridge.conflist 
+  212  lab manage-networking start
+  213   sudo podman run --name mysqldb-port  -d -v /var/local/mysql:/var/lib/mysql/data -p 13306:3306  -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 \ 
+  214   rhscl/mysql-57-rhel7
+  215   sudo podman run --name mysqldb-port  -d -v /var/local/mysql:/var/lib/mysql/data -p 13306:3306  -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 \ 
+  216   sudo podman run --name mysqldb-port  -d -v /var/local/mysql:/var/lib/mysql/data -p 13306:3306  -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55  -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55  rhscl/mysql-57-rhel7
+  217  sudo podman ps
+  218  mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items < /home/student/DO180/labs/manage-networking/db.sql 
+  219  mysql -user -h 127.0.0.1 -pmypa55 -P13306 items -e "SELECT * FROM Item"
+  220  mysql -uuser1 -h 127.0.0.1 -pmypa55 -P13306 items -e "SELECT * FROM Item"
+  221  sudo podman exec -it mysqldb-port /bin/bash
+  222  sudo podman exec -it mysqldb-port > /opt/rh/rh-mysql57/root/usr/bin/mysql -uroot items -e "SELECT * FROM Item"
+  223  sudo podman exec -it mysqldb-port \ > /opt/rh/rh-mysql57/root/usr/bin/mysql -uroot items -e "SELECT * FROM Item"
+  224  sudo podman exec -it mysqldb-port > /opt/rh/rh-mysql57/root/usr/bin/mysql -uroot items -e "SELECT * FROM Item"
+  225  ls -la /opt/rh
+  226  lab container-review grade
+  227  lab manage-review start
+  228  rm -fv /var/local/mysql
+  229  rm -rf /var/local/mysql
+  230  sudo rm -rf /var/local/mysql
+  231  lab manage-review start
+  232  mkdir /var/local/mysql
+  233  sudo mkdir /var/local/mysql
+  234  sudo chown 27:27 /var/local/mysql
+  235  history
+  236  history|grep se
+  237  sudo semanage fcontext -a -t container_file_t '/var/local/mysql(/.*)?'
+  238  history|grep res
+  239  sudo restorecon -R /var/local/mysql
+  240  sudo podman run --name mysql-2 -d -v /var/local/mysql:/var/lib/mysql/data -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 rhscl/mysql-57-rhel7 
+  241  lab manage-review grade
+  242  sudo podman ps -a
+  243  sudo podman rm af7
+  244  sudo podman rm e7
+  245  sudo podman ps -a
+  246  lab manage-review grade
+  247  sudo podman run --name mysql-1 -d -v /var/local/mysql:/var/lib/mysql/data -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 rhscl/mysql-57-rhel7 
+  248  lab manage-review grade
+  249  sudo podman ps -q
+  250  sudo podman ps -a
+  251  sudo podman exec mysql-2 /bin/bash
+  252  sudo podman exec mysql-2 /bin/bash -it
+  253  lab manage-review stop
+  254  lab manage-review finish
+  255  history
+  256  curl -Ls https://quay.io/v2/redhattraining/httpd-parent/tags/lis |python -m json.tool
+  257  curl -ks https://quay.io/v2/redhattraining/httpd-parent/tags/lis |python -m json.tool
+  258  curl -ks https://quay.io/v2/redhattraining/httpd-parent/tags/lisy |python -m json.tool
+  259  curl -ks https://quay.io/v2/redhattraining/httpd-parent/tags/list |python -m json.tool
+  260  curl -ks https://quay.io/v2/rhscl/rhel7/tags/list |python -m json.tool
+  261  lab image-operations start
+  262  sudo podman login quay.io
+  263  sudo podman run -d --name official-httpd -p 8180:80 redhattraining/httpd-parent
+  264  sudo podman exec -it official-httpd /bin/bash
+  265  curl localhost:8180/do180.html
+  266  sudo podman inspect -f "{{range .Mounts}}{{println .Destination}}{{end}}" official-httpd
+  267  sudo podman diff official-httpd
+  268  sudo podman stop official-httpd
+  269  sudo podman commit -a alozbon official-httpd do180-custom-httpd
+  270  sudo podman images
+  271  source /usr/local/etc/ocp4.config 
+  272  sudo podman tag do180-custom-httpd > quay.io/${RHT_OCP4_QUAY_USER}/do180-custom-httpd:v1.0
+  273  sudo podman tag do180-custom-httpd \ > quay.io/${RHT_OCP4_QUAY_USER}/do180-custom-httpd:v1.0
+  274  sudo podman tag do180-custom-httpd quay.io/${RHT_OCP4_QUAY_USER}/do180-custom-httpd:v1.0
+  275  sudo podman images
+  276  sudo podman push quay.io/alozbon/do180-custom-httpd:v1.0
+  277  sudo podman pull -q quay.io/alozbon/do180-custom-httpd:v1.0
+  278  sudo podman run -d --name test-httpd -p 8280:80 alozbon/do180-custom-httpd:v1.0
+  279  curl http://localhost:8280/do180.html
+  280  lab image operations finish
+  281  lab image-operations finish
+  282  sudo podman images
+  283  lab image-review start
+  284  sudo podman search nginx
+  285  sudo podman search doker.io/nginx
+  286  sudo podman login docker.io
+  287  sudo podman search doker.io/nginx
+  288  sudo vi /etc/containers/registries.
+  289  sudo vi /etc/containers/registries.conf
+  290  sudo podman search doker.io/nginx
+  291  sudo vi /etc/containers/registries.conf
+  292  sudo podman search docker.io/nginx
+  293  sudo podmain run -d --name nginx -p 8080:80 docker.io/nginsx
+  294  sudo podman run -d --name nginx -p 8080:80 docker.io/nginx
+  295  sudo podman exec -ti nginx /bin/bash
+  296  curl localhost:8080
+  297  sudo podman ps -a
+  298  sudo podman stop nginx
+  299  sudo podmain commit --help
+  300  sudo podman commit --help
+  301  sudo podmain commit nginx dl180/mynginx:v1.0-SNAPSHOT
+  302  sudo podman commit nginx dl180/mynginx:v1.0-SNAPSHOT
+  303  sudo podman images
+  304  sudo podman commit nginx dl180/mynginx:v1.0-SNAPSHOT --author "alozbon"
+  305  sudo podman images
+  306  sudo podman rmi e753d09667c2 cac3f525b80f
+  307  sudo podman commit nginx dl180/mynginx:v1.0-SNAPSHOT --author "alozbon"
+  308  sudo podman images
+  309  lab image-review grade
+  310  sudo podman start mynginx
+  311  sudo podman run -d --name official-nginx-dev -p 8080:80 do180/mynginx:v1.0-SNAPSHOT 
+  312  sudo podman commit nginx do180/mynginx:v1.0-SNAPSHOT --author "alozbon"
+  313  sudo podman run -d --name official-nginx-dev -p 8080:80 do180/mynginx:v1.0-SNAPSHOT 
+  314  curl localhost:8080/index.html
+  315  lab image-review grade
+  316  sudo podman stop official-nginx
+  317  lab image-review finish
+  318  lab image-review start
+  319  sudo podman search docker.io/nginx
+  320  sudo podman run -d --name official-nginx -p 8080:80 docker.io/nginx
+  321  sudo podman exec -ti official-nginx /bin/bash
+  322  curl localhost:8080
+  323  sudo podman stop official-nginx
+  324  history |grep commit
+  325  sudo podman commit official-nginx do180/mynginx:v1.0-SNAPSHOT --author "alozbon"
+  326  sudo podman run -d -p 8080:80 --name official-nginx-dev do180/mynginx:v1.0-SANPSHOT
+  327  sudo podman images
+  328  sudo podman run -d -p 8080:80 --name official-nginx-dev do180/mynginx:v1.0-SANPSHOT
+  329  sudo podman run -d -p 8080:80 --name official-nginx-dev localhost/do180/mynginx:v1.0-SANPSHOT
+  330  sudo podman run -d -p 8080:80 --name official-nginx-dev localhost/do180/mynginx:v1.0-SNAPSHOT
+  331  docker images
+  332  sudo podman images
+  333  sudo podman exec -ti official-nginx-dev /bin/bash
+  334  history|grep commit
+  335  sudo podman commit official-nginx-dev:v1.0-SNAPSHOT do180/mynginx:v1.0 --author "alozbon"
+  336  sudo podman commit official-nginx-dev do180/mynginx:v1.0 --author "alozbon"
+  337  sudo podman images
+  338  sudo podman rmi 6ff190f0867d f01df196f8b8
+  339  lab image-review grade
+  340  sudo podman stop c39a868aad02
+  341  sudo podman run --name my-nginx -d do180/mynginx:v1.0 
+  342  lab image-review grade
+  343  sudo podman images
+  344  sudo podman rmi c39a868aad02
+  345  sudo podman rmi 6ff190f0867d
+  346  lab image-review grade
+  347  sudo podman images
+  348  sudo podman rmi -f 6ff190f0867d
+  349  lab image-review grade
+  350  sudo podeman run -d --name official-nginx-dev -p 8080:80 do180/mynginx:v1.0-SNAPSHOT
+  351  sudo podman run -d --name official-nginx-dev -p 8080:80 do180/mynginx:v1.0-SNAPSHOT
+  352  curl localhost:8080
+  353  sudo podman stop official-nginx-dev
+  354  history|grep commit
+  355  sudo podman commit do180/yngnix:v1.0 official-nginx-dev --author "alozbon"
+  356  sudo podman commit do180/nginx:v1.0 official-nginx-dev --author "alozbon"
+  357  lab image-review grade
+  358  lab image-review finish
+  359  ls -ltr
+  360  ls DO180-apps
+  361  mkdir custom
+  362  cd custom
+  363  touch Dockerfile
+  364  sudo yum search rhscl
+  365  sudo yum install -y rhscl-dockerfiles
+  366  ls -la /usr/share/rhscl-dockerfiles/
+  367  ls -la /usr/share/rhscl-dockerfiles/thel7
+  368  ls -la /usr/share/rhscl-dockerfiles/rhe7
+  369  ls -la /usr/share/rhscl-dockerfiles/rhl7
+  370  ls -la /usr/share/rhscl-dockerfiles/rhel7
+  371  less /usr/share/rhscl-dockerfiles/rhel7/nginx16/Dockerfile 
+  372  less /usr/share/rhscl-dockerfiles/rhel7/mariadb55/Dockerfile 
+  373  lab dokerfile-create start
+  374  lab dockerfile-create start
+  375  ls -ltr
+  376  more Dockerfile 
+  377  cd ..
+  378  ls -ltr
+  379  cd DO180/labs/dockerfile-create/
+  380  ls -ltr
+  381  ls -la
+  382  more training.repo 
+  383  pwd
+  384  vi Dockerfile
+  385  sudo podman build --layers=false -t do180/apache < Dockerfile 
+  386  sudo podman build --layers=false -t do180/apache .
+  387  vi Dockerfile 
+  388  sudo podman build --layers=false -t do180/apache < Dockerfile 
+  389  sudo podman build --layers=false -t do180/apache .
+  390  sudo podman images
+  391  sudo podman run --name lab-apache -d -p 10080:80 do180/apache
+  392  sudo podman ps
+  393  curl localhost:100080
+  394  curl localhost:10080
+  395  sudo podman build  -t do180/apache .
+  396  sudo podman images
+  397  lab dockerfile-create finish
+  398  docker images
+  399  sudo podman images
+  400  sudo podman rmi -f 6ff190f0867d 6dc55adf9ea3
+  401  docker images
+  402  sudo podman images
+  403  ls
+  404  vi Dockerfile 
+  405  cp Dockerfile Dockerfile_lab1
+  406  vi Dockerfile
+  407  ls
+  408  ls ..
+  409  ls -la src
+  410  ls ..
+  411  cd ..
+  412  lab docker-review start
+  413  lab dockerfile-review start
+  414  ls -ltr
+  415  cd dockerfile-review/
+  416  ls
+  417  cat Dockerfile 
+  418  ls -la src
+  419  more ../dockerfile-create/Dockerfile
+  420  cp ../dockerfile-create/Dockerfile Dockerfile_antonio
+  421  vi Dockerfile_antonio 
+  422  cat Dockerfile
+  423  vi Dockerfile_antonio 
+  424  cp Dockerfile Dockerfile_rh
+  425  vi Dockerfile_antonio 
+  426  ls -ltr
+  427  cp Dockerfile_antonio Dockerfile
+  428  sudo podman build -t do180/custom-apache .
+  429  docker
+  430  sudo podmain run -d --name dockerfile do180/custom-apache -p 20080:8080
+  431  sudo podman run -d --name dockerfile do180/custom-apache -p 20080:8080
+  432  sudo podman ps -q
+  433  sudo podman ps -a
+  434  less Dockerfile
+  435  cat Dockerfile
+  436  cat Dockerfile_rh
+  437  vi Dockerfile
+  438  sudo podman images
+  439  sudo podman build -t do180/custom-apache .
+  440  history
+  441  sudo podman run -d --name dockerfile do180/custom-apache -p 20080:8080
+  442  sudo podman ps -q
+  443  sudo podman ps -a
+  444  sudo podman rm 11f
+  445  sudo podman rm 6a
+  446  sudo podman run -d --name dockerfile do180/custom-apache -p 20080:8080
+  447  sudo podman ps
+  448  sudo podman ps -a
+  449  sudo podman logs dockerfile
+  450  sudo podman logs
+  451  vi Dockerfile
+  452  sudo podman logs
+  453  sudo podman logs do
+  454  sudo podman logs dockerfile
+  455  vi Dockerfile
+  456  sudo podman build -t do180/custom-apache .
+  457  sudo podman ps -a
+  458  sudo podman rm -f 73
+  459  sudo podman run -d --name dockerfile do180/custom-apache -p 20080:8080
+  460  sudo podman images
+  461  sudo podman rmi -f 9d470b44c954 04a0b12a65db 04f4129da28c
+  462  sudo podman build -t do180/custom-apache  .
+  463  sudo podman run -d --name dockerfile do180/custom-apache -p 20080:8080
+  464  cat 
+  465  cat Dockerfile
+  466  vi Dockerfile
+  467  sudo podman images
+  468  sudo podman rm -f c37
+  469  sudo podman rm -f c37ac
+  470  sudo podman rmi c37
+  471  sudo podman rmi c37 -f
+  472  sudo podman build -t do180/custom-apache  .
+  473  sudo podman run -d --name dockerfile do180/custom-apache -p 20080:8080
+  474  vi Dockerfile
+  475  sudo podman images
+  476  vi Dockerfile
+  477  sudo podman build -t do180/custom-apache  .
+  478  sudo podman images
+  479  sudo podman run -d --name dockerfile do180/custom-apache -p 20080:8080
+  480  sudo podman ps -a
+  481  curl localhost:20080
+  482  lab dockerfile-review graade
+  483  lab dockerfile-review grade
+  484  cat Dockerfile
+  485  history | grep run
+  486  sudo podman ps 
+  487  sudo podman ps -a
+  488  sudo podman rm -f 97
+  489  sudo podman run -d --name dockerfile -p 20080:8080 do180/custom-apache 
+  490  sudo podman ps -a
+  491  curl localhost:20080
+  492  lab dockerfile-review grade
+  493  sudo podman ps -a
+  494  sudo podman kill a73
+  495  sudo podman rm -f a73
+  496  sudo podman images
+  497  sudo podman rmi 5b7
+  498  history build
+  499  history|grep build
+  500  sudo podman build -t do180/custom-apache  .
+  501  history
+  502  sudo podman run -d --name dockerfile -p 20080:8080 do180/custom-apache
+  503  sudo podman ps -a
+  504  sudo podman logs
+  505  sudo podman logs dockerfile
+  506  vi Dockerfile
+  507  sudo podman build -t do180/custom-apache  -f Dockerfile
+  508  docker ps -qa
+  509  sudo podman ps -a
+  510  sudo podman rm 33ac
+  511  sudo podman run -d --name dockerfile -p 20080:8080 do180/custom-apache
+  512  sudo podman ps -a
+  513  lab dockerfile-review grade
+  514  lab dockerfile-review finish
+  515  ls -ltr
+  516  cp Dockerfile Dockerfile_antonio
+  517  sudo podman build -t do180/custom-apache  -f Dockerfile_antonio
+  518  vi Dockerfile_antonio 
+  519  sudo podman build -t do180/custom-apache  -f Dockerfile_antonio
+  520  sudo podman build -t do180/custom-apache --layers=no  -f Dockerfile_antonio
+  521  sudo podman build -t do180/custom-apache -layers=no  -f Dockerfile_antonio
+  522  sudo podman build --help
+  523  sudo podman build -t do180/custom-apache --layers no  -f Dockerfile_antonio
+  524  ls
+  525  history|grep layers
+  526  sudo podman build -t do180/custom-apache --layers=false  -f Dockerfile_antonio
+  527  sudo podman images
+  528  sudo podman rmi -f c43 b67 c5d ba
+  529  docker iamges
+  530  sudo podman images
+  531  sudo podman rmi -f c5d 693
+  532  sudo podman images
+  533  sudo podman ps -a
+  534  sudo podman rmi -f c5d
+  535  sudo podman rmi -f e5d
+  536  sudo podman ps -a
+  537  sudo podman images
+  538  sudo podman rmi -f 8b3
+  539  sudo podman images
+  540  oc login
+  541  cat /usr/local/etc/ocp4.config 
+  542  oc 
+  543  cat /usr/local/etc/ocp4.config 
+  544  oc login antoniojlozano
+  545  oc login
+  546  oc get projects
+  547  oc get all
+  548  oc get users
+  549  oc get user
+  550  oc get project
+  551  oc describe project
+  552  oc api-resource
+  553  oc api-resources
+  554  oc get routes
+  555  oc project
+  556  oc new-project test
+  557  oc project test
+  558  oc project alozbon
+  559  oc new-project alozbon
+  560  oc delte-project alozbon
+  561  oc delete-project alozbon
+  562  oc remove-project alozbon
+  563  oc delete project alozbon
+  564  oc get all
+  565  oc get pods
+  566  oc get bc
+  567  oc get cd
+  568  oc get dc
+  569  oc get co
+  570  oc resources
+  571  oc get svc
+  572  oc get images
+  573  ls
+  574  cd DO180
+  575  ls
+  576  cd labs
+  577  ls
+  578  cd dockerfile-review/
+  579  ls
+  580  cat Dockerfile_rh
+  581  cd
+  582  mysql -uuser1 -pmypa55 --protocol tcp -h localhost
+  583  oc get projects
+  584  oc get all
+  585  oc get dc/mysql-openshift -o yaml > dcmysql.yml
+  586  cat dcmysql.yml 
+  587  ls -ltr
+  588  oc get all
+  589  oc get svc/mysql-openshift -o yaml > svcmysql.yml
+  590  cat svcmysql.yml 
+  591  ls -ltr
+  592  oc get all
+  593  oc get route/mysql-openshift -o yaml > routemysql.yml
+  594  oc get replicationcontroller mysql-openshift
+  595  oc get replicationcontroller mysql-openshift-1
+  596  oc edit replicationcontroller mysql-openshift-1
+  597  history
+  598  history|grep oc4
+  599  history|grep oc
+  600  cat /usr/local/etc/ocp4.config
+  601  source /usr/local/etc/ocp4.config
+  602  oc login
+  603  oc get projects
+  604  oc project test
+  605  oc get all
+  606  lab openshift-resource start
+  607  lab openshift-resources start
+  608  oc new-projet ${RHT_OCP4_DEV_USER}-mysql-openshift
+  609  oc new-project ${RHT_OCP4_DEV_USER}-mysql-openshift
+  610  oc new-app --as-deployment-config --docker-image=registry.access.redhat.com/rhscl/mysql-57-rhel7:latest --name=mysql-openshift -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=testdb -e MYSQL_ROOT_PASSWORD=r00tpa55
+  611  oc status
+  612  oc get pods -o=wide
+  613  oc describe pod mysql-openshift-1-76bsj
+  614  oc get svc
+  615  oc describe service mysql-openshift
+  616  oc expose service mysql-openshift
+  617  oc get pods
+  618  oc port-forward mysql-openshift-1-76bsj 3306:3306
+  619  oc get all
+  620  oc edit dc mysql-openshift
+  621  history
+  622  oc delete project ${RHT_OCP4_DEV_USER}-mysql-openshift
+  623  lab openshift-resources finish
+  624  lab openshift-routes start
+  625  oc status
+  626  oc who ami
+  627  oc whoami
+  628  oc new-project ${RHT_OCP4_DEV_USER}-route
+  629  oc new-app --as-deployment-config php:7.3~https://github.com/${RHT_OCP4_GITHUB_USER}/DO180-apps --context-dir php-helloworld --name php-helloworld
+  630  oc get pods -w
+  631  oc logs -f bc/php-helloworld
+  632  oc describe svc/php-helloworld
+  633  oc expose svc/php-helloworld
+  634  oc describe route
+  635  curl php-helloworld-antoniojlozano-route.${RHT_OCP4_WILDCARD_DOMAIN}
+  636  oc delete route/php-helloworld
+  637  oc expose svc/php-helloworld --name=${RHT_OCP4_DEV_USER}-xyz
+  638  oc describe route
+  639  curl php-helloworld-antoniojlozano-xyz-route.${RHT_OCP4_WILDCARD_DOMAIN}
+  640  curl php-helloworld-xyz-antoniojlozano-route.${RHT_OCP4_WILDCARD_DOMAIN}
+  641  curl antoniojlozano-xyz-antoniojlozano-route.${RHT_OCP4_WILDCARD_DOMAIN}
+  642  curl php-helloworld-antoniojlozano-route.${RHT_OCP4_WILDCARD_DOMAIN}
+  643  lab openshift-routes finish
+  644  oc describe is php
+  645  oc describe is php -n openshift
+  646  lab openshift-s2i start
+  647  cd DO180/labs/openshift-s2i/
+  648  tree s2i-php-container/
+  649  cd s2i-php-container/5.6/s2i/bin/
+  650  ls
+  651  less assemble 
+  652  more run
+  653  pwd
+  654  cd ..
+  655  less Dockerfile.rhel7 
+  656  cd /home/student/DO180
+  657  git checkout master
+  658  cd ..
+  659  cd DO180-apps/
+  660  git checkout master
+  661  git checkout -b s2i
+  662  git push -u origin s2i
+  663  cat php-helloworld/index.php 
+  664  oc whoami
+  665  oc new-project ${RHT_OCP4_DEV_USER}-s2i
+  666  oc new-app --as-deployment-config php:7.3 --name=php-helloworld https://github.com/alozbon/DO180-apps#s2i --context-dir php-helloworld
+  667  oc get pods
+  668  oc logs --all-containers -f php-helloworld-1-build
+  669  oc describe dc/php-helloworld
+  670  oc expose service php-helloworld --name ${RHT_OCP4_DEV_USER}-helloworld
+  671  oc get route -o jsonpath='{..spec.host}{"\n"}
+  672  oc get route -o jsonpath='{..spec.host}{"\n"}'
+  673  curl -s antoniojlozano-helloworld-antoniojlozano-s2i.apps.eu45.prod.nextcle.com
+  674  vi php-helloworld/index.php 
+  675  git add .
+  676  git commit -m 'Changed index page contents.'
+  677  git push origin s2i
+  678  curl -s antoniojlozano-helloworld-antoniojlozano-s2i.apps.eu45.prod.nextcle.com
+  679  oc start-build php-helloworld
+  680  oc logs php-helloworld-2-build -f
+  681  oc get pods
+  682  oc logs php-helloworld-2-build -f
+  683  curl -s antoniojlozano-helloworld-antoniojlozano-s2i.apps.eu45.prod.nextcle.com
+  684  oc get pods -w
+  685  oc get pods 
+  686  history 
+  687  oc get pods 
+  688  curl -s antoniojlozano-helloworld-antoniojlozano-s2i.apps.eu45.prod.nextcle.com
+  689  oc get pod
+  690  oc describe pod php-helloworld-2-build
+  691  history 
+  692  git status 
+  693  vi php-helloworld/index.php
+  694  oc get pod
+  695  oc logs php-helloworld-2-build
+  696  history 
+  697  oc rollback 
+  698  oc rollback -h
+  699  oc get pod
+  700  oc rollback php-helloworld
+  701  oc rollback dc php-helloworld
+  702  oc rollback dc/php-helloworld
+  703  oc get dc
+  704  cat /usr/local/etc/ocp4.config 
+  705  oc get pod
+  706  curl -s antoniojlozano-helloworld-antoniojlozano-s2i.apps.eu45.prod.nextcle.com
+  707  lab openshift-s2i finish
+  708  lab openshift-webconsole start
+  709  git cehckout master
+  710  git checkout master
+  711  get checkout -b console
+  712  git checkout -b console
+  713  git push -u origin console
+  714  vi php-helloworld/index.php 
+  715  git add .
+  716  git commit -m 'updated app'
+  717  git push origin console
+  718  lab openshift-webconsole finish
+  719  lab openshift-review start
+  720  oc new-project antoniojlozano-ocp
+  721  oc new-app -is php:7.3 https://github.com/RedHatTraining/DO180-apps/temps
+  722  ls 
+  723  ls temps/
+  724  history|grep github
+  725  oc new-app -is php:7.3 https://github.com/RedHatTraining/DO180-apps#temps
+  726  oc new-app --as-deployment-config -is php:7.3 https://github.com/RedHatTraining/DO180-apps --context-dir temps
+  727  oc new-app --as-deployment-config php:7.3~https://github.com/RedHatTraining/DO180-apps --context-dir temps
+  728  oc get pods -w
+  729  oc expose svc/temps
+  730  ocs expose svc/temps
+  731  oc expose svc/temps
+  732  oc get all
+  733  oc expose service/do180-apps
+  734  oc delete project antoniojlozano-ocp
+  735  oc new-project antoniolozano-ocp
+  736  oc new-app --as-deployment-config php:7.3~https://github.com/RedHatTraining/DO180-apps --context-dir temps --name temps
+  737  oc get pods -w
+  738  oc expose svc/temps
+  739  oc delete project antoniolozano-ocp
+  740  oc new-project antoniojlozano-ocp
+  741  oc new-app --as-deployment-config php:7.3~https://github.com/RedHatTraining/DO180-apps --context-dir temps --name temps
+  742  oc get pods -w
+  743  oc expose svc/temps
+  744  lab openshift-review grade
+  745  history
+  746  lab openshift-review grade
+  747  lab openshift-review finish
+  748  lab muticontainer-design start
+  749  lab multicontainer-design start
+  750  pwd
+  751  cd ..
+  752  cd DO180
+  753  less labs/multicontainer-design/images/mysql/Dockerfile 
+  754  cd labs/multicontainer-design/images/mysql/
+  755  ls
+  756  sudo podman build -t do180/mysql-57-rhel7 --layers=false .
+  757  sudo podman images
+  758  cd ..
+  759  cd nodejs/
+  760  less Dockerfile 
+  761  cat Dockerfile 
+  762  sudo podman build -t do180/nodejs --layers=false .
+  763  sudo podman images --format "table {{.ID}} {{.Repository}} {{.Tag}}"
+  764  pwd
+  765  cd ..
+  766  less deploy/nodejs/nodejs-source/models/db.js 
+  767  pwd
+  768  cd deploy/nodejs/
+  769  ./build.sh 
+  770  less build.sh
+  771  sudo podman images
+  772  cd networked/
+  773  vi /tmp/kk
+  774  pwd
+  775  vi run.sh 
+  776  pwd
+  777  ./run.sh
+  778  sudo podman ps 
+  779  sudo podman exec -it todoapi env
+  780  curl -w "\n" http://127.0.0.1:30080/todo/api/itmes/1
+  781  curl -w "\n" http://127.0.0.1:30080/todo/api/items/1
+  782  cd ..
+  783  ls -ltr
+  784  cd ..
+  785  ls
+  786  ls images
+  787  cd images/
+  788  ls -ltr
+  789  cd mysql
+  790  ls -ltr
+  791  less Dockerfile 
+  792  ls root
+  793  ls -R root
+  794  ls -ltr
+  795  more Dockerfile 
+  796  ls -la root
+  797  ls -laR usr
+  798  ls -laR root
+  799  ls ltr
+  800  more Dockerfile 
+  801  more root/usr/share/container-scripts/mysql/post-init.sh 
+  802  cd ..
+  803  cd nodejs/
+  804  ls -ltr
+  805  more Dockerfile 
+  806  pwd
+  807  cd ..
+  808  cd deploy/
+  809  ls
+  810  cd nodejs/
+  811  ls -ltr
+  812  less Dockerfile 
+  813  more nodejs-source/models/db.js 
+  814  more build.sh
+  815  ls -ltr
+  816  more Dockerfile 
+  817  ls
+  818  cd networked/
+  819  ls
+  820  more run.sh 
+  821  cd
+  822  lab multicontainer-design finish
+  823  sudo podman images
+  824  sudo podeman rmi -f 32
+  825  sudo podeman rmi -f 31
+  826  sudo podman rmi -f 31
+  827  sudo podman images
+  828  sudo podman rmi c
+  829  sudo podman rmi 5
+  830  oc get templates -n openshift
+  831  oc get template jenkins-persistent
+  832  oc get template/jenkins-persistent -n openshift
+  833  oc get template/jenkins-persistent -n openshift -o yaml
+  834  oc get template/jenkins-persistent -n openshift -o yaml|grep -i kind
+  835  lab multicontainer-openshift start
+  836  cd DO180/labs/multicontainer-openshift/images/mysql/
+  837  sudo podman build -t do180-mysql-57-rhel7 .
+  838  sudo podman login quay.io -u ${RHT_OCP4_QUAY_USER} 
+  839  sudo podman tag do180-mysql-57-rhel7 quay.io/${RHCT_OCP4_QUAY_USER}/do180-mysql-57-rhel7
+  840  sudo podman tag do180-mysql-57-rhel7 quay.io/sudo podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 \${RHCT_OCP4_QUAY_USER}/do180-mysql-57-rhel7
+  841  -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 
+  842  -v $PWD/work/data:/var/lib/mysql/data 
+  843  -v $PWD/work/init:/var/lib/
+  844  -v $PWD/work/init:/var/lib/:
+  845  -v $PWD/work/init:/var/lib/:.1.11
+  846  -v $PWD/work/init:/var/lib/:1
+  847  clear
+  848  source /usr/local/etc/ocp4.config 
+  849  sudo podman tag do180-mysql-57-rhel7 quay.io/sudo podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 \${RHCT_OCP4_QUAY_USER}/do180-mysql-57-rhel7
+  850  sudo podman tag do180-mysql-57-rhel7 quay.io/${RHCT_OCP4_QUAY_USER}/do180-mysql-57-rhel7
+  851  ls -ltr
+  852  pwd
+  853  sudo podman build -t do180-mysql-57-rhel7 .
+  854  source /usr/local/etc/ocp4.
+  855  source /usr/local/etc/ocp4.config 
+  856  sudo podman login quey.io -u alozbon
+  857  sudo podman tag do180-mysql-57-rhel7 quay.io/alozbon/do180-mysql-57-rhel7
+  858  sudo podman push quay.io/alozbon/do180-mysql-57-rhel7
+  859  pwd
+  860  cd ..
+  861  cd images/nodejs
+  862  sudo podman build -t do180-nodejs .
+  863  pwd
+  864  cd ..
+  865  cd deploy/nodejs/
+  866  ./build.sh
+  867  sudo podman tag do180/todonodejs quay.io/alozbon/do180-todonodejs
+  868  sudo podman push quay.io/alozbon/do180-todonodejs
+  869  oc whoami
+  870  oc new-project antoniojlozano-template
+  871  pdw
+  872  pwd
+  873  cd ..
+  874  ls tod*
+  875  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=alozbon | oc create -f -
+  876  oc get pods
+  877  history
+  878  sudo podman login quay.io -u alozbon
+  879  sudo podman push quay.io/alozbon/do180-mysql-57-rhel7
+  880  sudo podman push quay.io/alozbon/do180-todonodejs
+  881  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=alozbon | oc create -f -
+  882  oc get pods
+  883  history
+  884  echo ${RHT_OCP4_QUAY_USER} 
+  885  oc get pods
+  886  oc delete pod mysql
+  887  oc delete pod todoapi
+  888  oc get pods
+  889  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=alozbon | oc create -f -
+  890  oc get pods
+  891  sudo podman images
+  892  oc delete projecdt antoniojlozano-template
+  893  oc delete project antoniojlozano-template
+  894  oc new-project antoniojlozano-template
+  895  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=alozbon | oc create -f -
+  896  history
+  897  oc project antoniojlozano-template
+  898  oc whoami
+  899  oc delete project antoniojlozano-template
+  900  oc new-project antoniojlozano-template
+  901  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=alozbon | oc create -f -
+  902  oc get pods
+  903  oc get logs -f mysql
+  904  oc get logs
+  905  oc get pods logs
+  906  oc get logs --help
+  907  oc logs
+  908  oc logs -h
+  909  oc logs mysql
+  910  oc get pods
+  911  ls
+  912  more todo-template.json 
+  913  oc delete project antoniojlozano-templates
+  914  oc delete project antoniojlozano-template
+  915  oc get pods
+  916  history
+  917  echo ${RHT_OCP4_QUAY_USER} 
+  918  history
+  919  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+  920  oc new-project antoniojlozano-template
+  921  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+  922  oc get pods
+  923  oc get pods -w
+  924  lab multicontainer-openshift finish
+  925  lab multicontainer-openshift start
+  926  source /usr/local/etc/ocp4.config 
+  927  set
+  928  env
+  929  cat /usr/local/etc/ocp4.config 
+  930  cd DO180/labs/multicontainer-openshift/images/mysql/
+  931  sudo podman build -t do180-mysql-57-rhel7 .
+  932  sudo podman login quay.io -u ${RHT_OCP4_QUAY_USER} 
+  933  sudo podman tag do180-mysql-57-rhel7 quay.io/${RHT_OCP4_QUAY_USER}/do180-mysql-57-rhel7
+  934  sudo podman push do180-mysql-57-rhel7 quay.io/${RHT_OCP4_QUAY_USER}/do180-mysql-57-rhel7
+  935  pwd
+  936  cd ../nodejs/
+  937  sudo podman build -t do180-nodejs .
+  938  cd ..
+  939  cd deploy/nodejs/
+  940  build.sh
+  941  ./build
+  942  ./build.sh
+  943  sudo podman tag do180/todonodejs quay.io/${RHT_OCP4_QUAY_USER}/do180-todonodejs
+  944  sudo podman push do180/todonodejs quay.io/${RHT_OCP4_QUAY_USER}/do180-todonodejs
+  945  oc login -u ${RHT_OCP4_DEV_USER} -p ${RHT_OCP4_DEV_PASSWORD} ${RHT_OCP4_MASTER_API} 
+  946  oc new-project ${RHT_OCP4_DEV_USER}-template
+  947  cd ..
+  948  ls todo-template.json 
+  949  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+  950  oc get pods -w
+  951  history
+  952  pwd
+  953  ls
+  954  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+  955  oc get pod
+  956  oc get svc
+  957  cat /usr/local/etc/ocp4.config 
+  958  vim todo-template.json 
+  959  sudo podman login quay.io
+  960  sudo podman images
+  961  sudo podman search quay.io/alozbon
+  962  sudo vi /usr/local/etc/ocp4.config 
+  963  history
+  964  lab multicontainer-openshift finish
+  965  lab multicontainer-openshift start
+  966  source /usr/local/etc/ocp4.config 
+  967  history
+  968  cd images/
+  969  cd mysql/
+  970  sudo podman build -t do180-mysql-57-rhel7 .
+  971  sudo podman login quay.io -u ${RHT_OCP4_QUAY_USER} 
+  972  sudo podman tag do180-mysql-57-rhel7 quay.io/${RHT_OCP4_QUAY_USER}/do180-mysql-57-rhel7
+  973  sudo podman tag do180-mysql-57-rhel7 quay.io/alozbon/do180-mysql-57-rhel7
+  974  sudo podman push do180-mysql-57-rhel7 quay.io/alozbon/do180-mysql-57-rhel7
+  975  cd ../nodejs/
+  976  sudo podman build -t do180-nodejs .
+  977  cd ../deploy/nodejs
+  978  cd ../../deploy/nodejs/
+  979  ./build.sh
+  980  sudo podman tag do180/todonodejs quay.io/alozbon/do180-todonodejs
+  981  sudo podman push do180/todonodejs quay.io/alozbon/do180-todonodejs
+  982  oc new-project ${RHT_OCP4_DEV_USER}-template
+  983  cd ..
+  984  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+  985  oc get pods -w
+  986  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=alozbon | oc create -f -
+  987  oc get pods
+  988  oc delete project antoniojlozano-template
+  989  oc new-project ${RHT_OCP4_DEV_USER}-template
+  990  oc delete project antoniojlozano-template
+  991  oc new-project ${RHT_OCP4_DEV_USER}-template
+  992  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=alozbon | oc create -f -
+  993  oc get pods -w
+  994  history |grep finish
+  995  lab multicontainer-openshift finish
+  996  vi /usr/local/etc/ocp4.config 
+  997  sudo vi /usr/local/etc/ocp4.config 
+  998  source /usr/local/etc/ocp4.config 
+  999  sudo podman login quay.io
+ 1000  exit
+ 1001  source /usr/local/etc/ocp4.config 
+ 1002  sudo podman login quay.io
+ 1003  lab multicontainer-openshit finish
+ 1004  lab multicontainer-openshift finish
+ 1005  sudo podman login quay.io
+ 1006  lab multicontainer-openshift start
+ 1007  history
+ 1008  source /usr/local/etc/ocp4.config 
+ 1009  cd DO180/labs/multicontainer-openshift/
+ 1010  d images/mysql/
+ 1011  cd images/mysql/
+ 1012  sudo podman build -t do180-mysql-57-rhel7 .; sudo podman login quay.io -u ${RHT_OCP4_QUAY_USER} ; sudo podman tag do180-mysql-57-rhel7 quay.io/${RHT_OCP4_QUAY_USER}/do180-mysql-57-rhel7; sudo podman push do180-mysql-57-rhel7 quay.io/alozbon/do180-mysql-57-rhel7
+ 1013  cd ../nodejs/
+ 1014  history
+ 1015  sudo podman build -t do180-nodejs .; cd ../../deploy/nodejs/; ./build.sh
+ 1016  history
+ 1017  sudo podman tag do180/todonodejs quay.io/alozbon/do180-todonodejs; sudo podman push do180/todonodejs quay.io/alozbon/do180-todonodejs
+ 1018  cd ..
+ 1019  history
+ 1020  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+ 1021  oc new-project ${RHT_OCP4_DEV_USER}-template
+ 1022  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+ 1023  ls
+ 1024  cd ..
+ 1025  ls
+ 1026  oc process -f todo-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+ 1027  oc get pods
+ 1028  oc get pods -w
+ 1029  oc expose service todoapi
+ 1030  oc status
+ 1031  curl -w "\n" http://todoapi-antoniojlozano-template.apps.eu45.prod.nextcle.com/todo/api/items/1
+ 1032  lab multiconainer-openshit finish
+ 1033  lab multicontainer-openshift finish
+ 1034  cd ..
+ 1035  lab multicontainer-review start
+ 1036  cd ..
+ 1037  cd -
+ 1038  cd multicontainer-review/
+ 1039  ls -ltr
+ 1040  cd images
+ 1041  ls -ltr
+ 1042  cd mysql/
+ 1043  ls
+ 1044  more ../../quote-php-template.json 
+ 1045  cat ../../quote-php-template.json |grep image
+ 1046  sudo podman build do180-mysql-57-rhel7 .
+ 1047  history|grep build
+ 1048  sudo podman build -t do180-mysql-57-rhel7 .
+ 1049  sudo podman tag do180-mysql-57-rhel7 quay.io/alozbon/do180-mysql-57-rhel7
+ 1050  sudo podman push do180-mysql-57-rhel7 quay.io/alozbon/do180-mysql-57-rhel7
+ 1051  cd ..
+ 1052  ls
+ 1053  cd quote-php/
+ 1054  cat ../../quote-php-template.json |grep iamge
+ 1055  cat ../../quote-php-template.json |grep image
+ 1056  sudo podman built -t do180-quote-php .
+ 1057  sudo podman build -t do180-quote-php .
+ 1058  sudo podman tag do180-quote-php quay.io/alozbon/do180-quote-php
+ 1059  sudo podman push do180-quote-php quay.io/alozbon/do180-quote-php
+ 1060  cd ..
+ 1061  ls -ltr
+ 1062  cd ..
+ 1063  ls -ltr
+ 1064  less quote-php-template.json 
+ 1065  oc new-project antoniojlozano-template
+ 1066  history|grep pro
+ 1067  oc process -f quote-php-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+ 1068  oc get pods -w
+ 1069  oc expose quote-php
+ 1070  oc expose svc/quote-php
+ 1071  oc get routes
+ 1072  lab multicontainer-review grade
+ 1073  oc delete proyect antoniojlozano-template
+ 1074  oc get project
+ 1075  oc delete project antoniojlozano-template
+ 1076  oc new-project antoniojlozano-deploy
+ 1077  oc process -f quote-php-template.json -p RHT_OCP4_QUAY_USER=${RHT_OCP4_QUAY_USER} | oc create -f -
+ 1078  oc get pods
+ 1079  oc expose svc/quote-php
+ 1080  lab multicontainer-review grade
+ 1081  lab multicontainer-review finish
+ 1082  ls -ltr
+ 1083  less quote-php-template.json 
+ 1084  lab troubleshoot-s2i start
+ 1085  source /usr/local/etc/ocp4.config 
+ 1086  cd ..
+ 1087  cd DO180-apps/
+ 1088  git checkout master
+ 1089  git checkout -b troubleshoot-s2i
+ 1090  git push -u origin troubleshoot-s2i
+ 1091  oc whoami
+ 1092  oc new-project antoniojlozano-nodejs
+ 1093  oc new-app --as-deployment-config --context-dir=nodejs-helloworld https://github.com/alozbon/DO180-apps#troubleshoot-s2i -i nodejs:12 --name nodejs-hello --build-env npm_config_registry=http://${RHT_OCP4_NEXUS_SERVER}/repository/npm-proxy
+ 1094  oc get pods -w
+ 1095  oc logs bc/nodejs-hello
+ 1096  vi nodejs-helloworld/package.json 
+ 1097  git add .
+ 1098  git commit -m "update version"
+ 1099  git pusth
+ 1100  git push
+ 1101  oc start-build bc/nodejs-hello
+ 1102  oc get pods -w
+ 1103  oc logs bc/nodejs-hello
+ 1104  oc logs -f bc/nodejs-hello
+ 1105  oc get pods
+ 1106  oc logs cd/nodejs-hello
+ 1107  oc logs dc/nodejs-hello
+ 1108  oc logs -f dc/nodejs-hello
+ 1109  oc expose svc/nodejs-hello
+ 1110  oc get route -o yaml
+ 1111  curl -w "\n" http://nodejs-hello-nodejs.apps.cluster.lab.example.com
+ 1112  curl -w "\n" http://nodejs-hello-antoniojlozano-nodejs.apps.eu45.prod.nextcle.com
+ 1113  oc get routes
+ 1114  curl -w "\n" http://nodejs-hello-antoniojlozano-nodejs.apps.eu45.prod.nextcle.com:8080
+ 1115  curl -w "\n" http://nodejs-hello-antoniojlozano-nodejs.apps.eu45.prod.nextcle.com
+ 1116  oc get pods
+ 1117  oc get logs nodejs-hello-2-build
+ 1118  oc get logs dc/nodejs-hello
+ 1119  oc logs cd/nodejs-hello
+ 1120  oc logs dc/nodejs-hello
+ 1121  vi nodejs-helloworld/package.json 
+ 1122  git add .
+ 1123  git commit -m "appjs"
+ 1124  git push
+ 1125  oc start-build nodejs-hello
+ 1126  o get pods
+ 1127  og get pods -w
+ 1128  oc get pods -w
+ 1129  oc logs -f nodejs-hello-3-build
+ 1130  oc get pods -w
+ 1131  oc logs dc/nodejs-hello
+ 1132  curl -w "\n" http://nodejs-hello-antoniojlozano-nodejs.apps.eu45.prod.nextcle.com
+ 1133  ls
+ 1134  cd eample
+ 1135  cd example/
+ 1136  history > history.txt
